@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Officer Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(120deg,#16a085,#2ecc71);
+}
+
+/* Header */
+
+header{
+background:#2c3e50;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+/* Navigation */
+
+nav{
+background:#34495e;
+padding:12px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#f1c40f;
+}
+
+/* Container */
+
+.container{
+width:85%;
+margin:auto;
+margin-top:40px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th, td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#16a085;
+color:white;
+}
+
+/* Status dropdown */
+
+select{
+padding:6px;
+border-radius:4px;
+}
+
+/* Update button */
+
+button{
+padding:8px 15px;
+background:#27ae60;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2ecc71;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Officer Dashboard</h1>
+</header>
+
+<nav>
+<a href="file:///C:/Users/ganji/OneDrive/Desktop/script%20squard/home%20page.html">Home</a>
+<a href="track.html">Track Complaint</a>
+<a href="#" onclick="logout()">Logout</a>
+</nav>
+
+<div class="container">
+
+<h2>Assigned Complaints</h2>
+
+<table id="complaintTable">
+
+<tr>
+<th>Complaint ID</th>
+<th>Title</th>
+<th>Category</th>
+<th>Location</th>
+<th>Status</th>
+<th>Update</th>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+/* Load complaints */
+
+let complaints = JSON.parse(localStorage.getItem("complaints")) || []
+
+let table = document.getElementById("complaintTable")
+
+complaints.forEach(function(c,index){
+
+let row = document.createElement("tr")
+
+row.innerHTML =
+
+"<td>"+c.id+"</td>" +
+"<td>"+c.title+"</td>" +
+"<td>"+c.category+"</td>" +
+"<td>"+c.location+"</td>" +
+
+"<td>" +
+
+"<select id='status"+index+"'>" +
+"<option "+(c.status==="Submitted"?"selected":"")+">Submitted</option>" +
+"<option "+(c.status==="Under Review"?"selected":"")+">Under Review</option>" +
+"<option "+(c.status==="Assigned"?"selected":"")+">Assigned</option>" +
+"<option "+(c.status==="In Progress"?"selected":"")+">In Progress</option>" +
+"<option "+(c.status==="Resolved"?"selected":"")+">Resolved</option>" +
+"</select>" +
+
+"</td>" +
+
+"<td><button onclick='updateStatus("+index+")'>Update</button></td>"
+
+table.appendChild(row)
+
+})
+
+/* Update complaint status */
+
+function updateStatus(index){
+
+let newStatus=document.getElementById("status"+index).value
+
+complaints[index].status=newStatus
+
+localStorage.setItem("complaints",JSON.stringify(complaints))
+
+alert("Status Updated")
+
+}
+
+/* Logout */
+
+function logout(){
+
+localStorage.removeItem("officerLoggedIn")
+
+window.location.href="officer-login.html"
+
+}
+
+</script>
+
+</body>
+</html>

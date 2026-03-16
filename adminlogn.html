@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Officer login portal</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(120deg,#3498db,#8e44ad);
+}
+
+.container{
+background:white;
+padding:35px;
+width:340px;
+border-radius:10px;
+box-shadow:0 6px 20px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+.container img{
+width:80px;
+margin-bottom:10px;
+}
+
+h2{
+color:#2c3e50;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+input:focus{
+border-color:#3498db;
+outline:none;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#27ae60;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2ecc71;
+}
+
+.small{
+margin-top:10px;
+font-size:13px;
+color:#777;
+}
+
+/* CAPTCHA */
+
+.captcha-box{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:5px;
+}
+
+.captcha{
+background:#f1f1f1;
+padding:8px 15px;
+font-weight:bold;
+letter-spacing:3px;
+border-radius:5px;
+font-size:18px;
+}
+
+.refresh{
+cursor:pointer;
+font-size:20px;
+margin-left:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+
+<h2>Admin Login</h2>
+
+<input type="email" id="email" placeholder="Enter Email">
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<!-- SECURITY CODE -->
+
+<label style="font-weight:bold;color:#2c3e50;">Security Code *</label>
+
+<div class="captcha-box">
+<div class="captcha" id="captcha"></div>
+<div class="refresh" onclick="generateCaptcha()">🔄</div>
+</div>
+
+<input type="text" id="captchaInput" placeholder="Enter Security Code">
+
+<button onclick="login()">Login</button>
+
+<p class="small">Citizen Grievance Management Portal</p>
+
+</div>
+
+<script>
+
+/* Admin credentials */
+
+const ADMIN_EMAIL = "admin@gmail.com"
+const ADMIN_PASSWORD = "admin123"
+
+let captchaCode=""
+
+/* Generate captcha */
+
+function generateCaptcha(){
+
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+captchaCode=""
+
+for(let i=0;i<6;i++){
+captchaCode+=chars.charAt(Math.floor(Math.random()*chars.length))
+}
+
+document.getElementById("captcha").innerText=captchaCode
+
+}
+
+generateCaptcha()
+
+function login(){
+
+let email=document.getElementById("email").value
+let password=document.getElementById("password").value
+let userCaptcha=document.getElementById("captchaInput").value
+
+if(userCaptcha!==captchaCode){
+alert("Invalid Security Code")
+generateCaptcha()
+return
+}
+
+if(email===ADMIN_EMAIL && password===ADMIN_PASSWORD){
+
+localStorage.setItem("adminLoggedIn","true")
+window.location.href="admin.html"
+
+}else{
+
+alert("Invalid Email or Password")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

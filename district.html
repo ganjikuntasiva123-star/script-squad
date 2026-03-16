@@ -1,0 +1,88 @@
+<!-- JAVASCRIPT SHOULD ALWAYS BE AT THE BOTTOM -->
+
+<script>
+
+/* STATE → DISTRICT LOGIC */
+
+function updateDistricts(){
+
+let state = document.getElementById("state").value
+let district = document.getElementById("district")
+
+district.innerHTML = "<option value=''>Select District</option>"
+
+let districts = {
+
+"Andhra Pradesh":[
+"Nellore","Tirupati","Chittoor","Kadapa","Kurnool","Guntur","Krishna","Visakhapatnam"
+],
+
+"Telangana":[
+"Hyderabad","Warangal","Karimnagar","Nizamabad","Khammam","Adilabad"
+],
+
+"Tamil Nadu":[
+"Chennai","Madurai","Coimbatore","Salem","Tiruchirappalli","Erode"
+]
+
+}
+
+if(districts[state]){
+
+districts[state].forEach(function(d){
+
+let option = document.createElement("option")
+option.value = d
+option.text = d
+
+district.appendChild(option)
+
+})
+
+}
+
+}
+
+
+/* SUBMIT COMPLAINT */
+
+function submitComplaint(){
+
+let title = document.getElementById("title").value
+let description = document.getElementById("description").value
+let category = document.getElementById("category").value
+let state = document.getElementById("state").value
+let district = document.getElementById("district").value
+
+if(title.trim()=="" || state=="" || district==""){
+alert("Please fill all required fields")
+return
+}
+
+let location = state + ", " + district
+
+let complaints = JSON.parse(localStorage.getItem("complaints")) || []
+
+let complaint = {
+id: "CMP" + Math.floor(Math.random()*10000),
+title:title,
+description:description,
+category:category,
+location:location,
+status:"Submitted"
+}
+
+complaints.push(complaint)
+
+localStorage.setItem("complaints", JSON.stringify(complaints))
+
+document.getElementById("complaintForm").style.display="none"
+
+document.getElementById("successMessage").style.display="block"
+
+document.getElementById("successMessage").innerHTML =
+"✅ Complaint Submitted Successfully.<br>Your Complaint ID: <b>"+complaint.id+"</b>"
+
+}
+
+</script>

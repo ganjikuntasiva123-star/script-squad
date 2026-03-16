@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Send Reminder - Citizen Grievance Portal</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(120deg,#3498db,#8e44ad);
+height:100vh;
+}
+
+/* Header */
+
+header{
+background:#2c3e50;
+padding:20px;
+text-align:center;
+color:white;
+}
+
+header h1{
+margin:0;
+color:#f1c40f;
+}
+
+/* Navigation */
+
+nav{
+background:#34495e;
+padding:12px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#f1c40f;
+}
+
+/* Form container */
+
+.container{
+width:420px;
+margin:60px auto;
+background:white;
+color:#2c3e50;
+padding:30px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.35);
+}
+
+h2{
+color:#2980b9;
+text-align:center;
+}
+
+/* Inputs */
+
+input, textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+}
+
+input:focus, textarea:focus{
+border-color:#3498db;
+outline:none;
+box-shadow:0 0 6px rgba(52,152,219,0.5);
+}
+
+/* CAPTCHA */
+
+.captcha-box{
+display:flex;
+align-items:center;
+margin-top:10px;
+}
+
+#captcha{
+font-size:20px;
+letter-spacing:3px;
+background:#ecf0f1;
+padding:8px 15px;
+border:1px dashed #555;
+font-weight:bold;
+color:#c0392b;
+}
+
+.refresh{
+margin-left:10px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* Button */
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:linear-gradient(120deg,#27ae60,#2ecc71);
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:linear-gradient(120deg,#219150,#27ae60);
+}
+
+/* Message */
+
+#message{
+margin-top:15px;
+color:#27ae60;
+font-weight:bold;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Citizen Grievance Management Portal</h1>
+</header>
+
+<nav>
+<a href="file:///C:/Users/ganji/OneDrive/Desktop/script%20squard/home%20page.html">Home</a>
+<a href="adout.html"> About us</a>
+<a href="help.html"> Help </a>
+</nav>
+
+<div class="container">
+
+<h2>Send Complaint Reminder</h2>
+
+<input type="text" id="complaintId" placeholder="Enter Complaint ID">
+
+<input type="email" id="email" placeholder="Citizen Email">
+
+<textarea id="reminderMessage" placeholder="Write reminder message"></textarea>
+
+<!-- Security Key -->
+<input type="password" id="securityKey" placeholder="Enter Security Key">
+
+<!-- CAPTCHA -->
+
+<div class="captcha-box">
+<div id="captcha"></div>
+<div class="refresh" onclick="generateCaptcha()">🔄</div>
+</div>
+
+<input type="text" id="captchaInput" placeholder="Enter Security Code">
+
+<button onclick="sendReminder()">Send Reminder</button>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+const SECURITY_KEY="ADMIN123";
+let captchaCode="";
+
+/* CAPTCHA generator */
+
+function generateCaptcha(){
+
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+captchaCode="";
+
+for(let i=0;i<6;i++){
+captchaCode+=chars.charAt(Math.floor(Math.random()*chars.length));
+}
+
+document.getElementById("captcha").innerText=captchaCode;
+
+}
+
+/* Reminder function */
+
+function sendReminder(){
+
+let id=document.getElementById("complaintId").value;
+let email=document.getElementById("email").value;
+let msg=document.getElementById("reminderMessage").value;
+let key=document.getElementById("securityKey").value;
+let captchaInput=document.getElementById("captchaInput").value;
+
+if(id==""||email==""||msg==""||key==""||captchaInput==""){
+alert("Please fill all fields");
+return;
+}
+
+if(key!==SECURITY_KEY){
+alert("Invalid Security Key");
+return;
+}
+
+if(captchaInput!==captchaCode){
+alert("Invalid Security Code");
+generateCaptcha();
+return;
+}
+
+document.getElementById("message").innerHTML=
+"Reminder for Complaint ID "+id+" sent successfully!";
+
+}
+
+generateCaptcha();
+
+</script>
+
+</body>
+</html>

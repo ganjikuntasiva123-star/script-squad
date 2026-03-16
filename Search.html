@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search Complaint</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+/* TOP NAVIGATION BAR */
+
+nav{
+background:#2c3e50;
+padding:15px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+margin-right:20px;
+font-size:16px;
+}
+
+nav a:hover{
+color:#f1c40f;
+}
+
+/* PAGE CENTER */
+
+.main{
+display:flex;
+justify-content:center;
+align-items:center;
+height:90vh;
+}
+
+/* SEARCH BOX */
+
+.container{
+background:white;
+padding:30px;
+width:400px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+input{
+width:90%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+background:#3498db;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2980b9;
+}
+
+.result{
+margin-top:20px;
+font-size:16px;
+}
+
+/* Loader */
+
+.loader{
+display:none;
+margin:15px auto;
+border:6px solid #f3f3f3;
+border-top:6px solid #3498db;
+border-radius:50%;
+width:40px;
+height:40px;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+
+<nav>
+<a href="file:///C:/Users/ganji/OneDrive/Desktop/script%20squard/home%20page.html">Home</a>
+
+<a href="search.html">🔍 Search</a>
+</nav>
+
+<div class="main">
+
+<div class="container">
+
+<h2>Search Complaint</h2>
+
+<input type="text" id="cid" placeholder="Enter Complaint ID">
+
+<br>
+
+<button onclick="searchComplaint()">Search</button>
+
+<div id="loader" class="loader"></div>
+
+<div id="result" class="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function searchComplaint(){
+
+let id=document.getElementById("cid").value.trim();
+
+let complaints=JSON.parse(localStorage.getItem("complaints")) || [];
+
+let result=document.getElementById("result");
+let loader=document.getElementById("loader");
+
+result.innerHTML="";
+loader.style.display="block";
+
+setTimeout(function(){
+
+loader.style.display="none";
+
+let found=complaints.find(c => c.id === id);
+
+if(found){
+
+result.innerHTML =
+"<b>Name:</b> "+found.name+"<br>"+
+"<b>Category:</b> "+found.category+"<br>"+
+"<b>Location:</b> "+found.location+"<br>"+
+"<b>Status:</b> "+found.status;
+
+}
+else{
+result.innerHTML="❌ Complaint not found";
+}
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>

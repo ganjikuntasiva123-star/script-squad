@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Officer Login</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#3498db,#8e44ad);
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:10px;
+width:340px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+h2{
+color:#2c3e50;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#27ae60;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#219150;
+}
+
+.captcha{
+background:#eee;
+padding:8px;
+letter-spacing:3px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Officer Login</h2>
+
+<input type="text" id="name" placeholder="Officer Name">
+<input type="text" id="officerId" placeholder="Officer ID">
+<input type="email" id="email" placeholder="Email">
+
+<div class="captcha" id="captcha"></div>
+
+<input type="text" id="captchaInput" placeholder="Enter Security Code">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+/* CAPTCHA */
+
+let captchaCode=""
+
+function generateCaptcha(){
+
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+captchaCode=""
+
+for(let i=0;i<6;i++){
+captchaCode+=chars.charAt(Math.floor(Math.random()*chars.length))
+}
+
+document.getElementById("captcha").innerText=captchaCode
+
+}
+
+generateCaptcha()
+
+
+/* LOGIN FUNCTION */
+
+function login(){
+
+let name = document.getElementById("name").value.trim().toLowerCase()
+let id = document.getElementById("officerId").value.trim()
+let email = document.getElementById("email").value.trim().toLowerCase()
+let userCaptcha = document.getElementById("captchaInput").value.trim()
+
+if(name=="" || id=="" || email==""){
+alert("Please fill all fields")
+return
+}
+
+if(userCaptcha.replace(/\s/g,'').toLowerCase() !== captchaCode.toLowerCase()){
+alert("Invalid Security Code")
+generateCaptcha()
+return
+}
+
+if(name==="siva" && id==="9441094696" && email==="sivaganjikunta007@gmail.com"){
+
+localStorage.setItem("officerLoggedIn","true")
+
+window.location.href="file:///C:/Users/ganji/OneDrive/Desktop/script%20squard/officerdashbord.html"
+
+}else{
+
+alert("Invalid Login Credentials")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

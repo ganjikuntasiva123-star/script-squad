@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Citizen Grievance Management Portal</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f4f6f8;
+}
+
+header{
+    background:#2c3e50;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+nav{
+    background:#34495e;
+    padding:10px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:6px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+input, textarea, select{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:15px;
+}
+
+button{
+    background:#27ae60;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#219150;
+}
+
+footer{
+    text-align:center;
+    padding:15px;
+    background:#2c3e50;
+    color:white;
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Citizen Grievance Management Portal</h1>
+<p>Report civic issues and track complaint status</p>
+</header>
+
+<nav>
+<a href="#">Home</a>
+<a href="#report">Report Issue</a>
+<a href="#track">Track Complaint</a>
+</nav>
+
+<div class="container">
+
+<div class="card">
+<h2>About Portal</h2>
+<p>
+This platform allows citizens to report civic issues such as road damage,
+garbage overflow, water supply problems, and streetlight failures.
+Users can submit complaints and track their status online.
+</p>
+</div>
+
+<div class="card" id="report">
+<h2>Submit a Complaint</h2>
+
+<form onsubmit="submitComplaint(event)">
+
+<label>Name</label>
+<input type="text" id="name" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Issue Type</label>
+<select id="issue">
+<option>Road Damage</option>
+<option>Garbage Issue</option>
+<option>Water Supply</option>
+<option>Streetlight Problem</option>
+</select>
+
+<label>Description</label>
+<textarea id="desc" rows="4"></textarea>
+
+<button type="submit">Submit Complaint</button>
+
+</form>
+
+<p id="msg"></p>
+
+</div>
+
+<div class="card" id="track">
+<h2>Track Complaint</h2>
+
+<label>Enter Complaint ID</label>
+<input type="text" id="cid">
+
+<button onclick="trackComplaint()">Track</button>
+
+<p id="status"></p>
+
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 Citizen Grievance Management System</p>
+</footer>
+
+<script>
+
+let complaints = {}
+
+function submitComplaint(e){
+e.preventDefault()
+
+let id = "CMP" + Math.floor(Math.random()*10000)
+
+complaints[id] = "Submitted"
+
+document.getElementById("msg").innerHTML =
+"Complaint submitted successfully. Your ID: <b>"+id+"</b>"
+
+}
+
+function trackComplaint(){
+
+let id = document.getElementById("cid").value
+
+if(complaints[id]){
+document.getElementById("status").innerHTML =
+"Complaint Status: " + complaints[id]
+}
+else{
+document.getElementById("status").innerHTML =
+"Complaint ID not found"
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Complaints Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(120deg,#3498db,#8e44ad);
+}
+
+/* Header */
+
+header{
+background:#2c3e50;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+/* Navigation */
+
+nav{
+background:#34495e;
+padding:12px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#f1c40f;
+}
+
+/* Container */
+
+.container{
+width:85%;
+margin:auto;
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Search Bar */
+
+.search-box{
+margin-top:10px;
+}
+
+.search-box input{
+width:300px;
+padding:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+/* Table */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th, td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+th{
+background:#3498db;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Complaints Dashboard</h1>
+</header>
+
+<nav>
+<a href="file:///C:/Users/ganji/OneDrive/Desktop/script%20squard/home%20page.html">Home</a>
+<a href="track.html">Track Status</a>
+</nav>
+
+<div class="container">
+
+<h2>Citizen Complaints</h2>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search complaint..." onkeyup="searchTable()">
+</div>
+
+<table id="complaintTable">
+
+<tr>
+<th>Complaint ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Location</th>
+<th>Status</th>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+/* Load complaints */
+
+let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+let table = document.getElementById("complaintTable");
+
+complaints.forEach(function(c){
+
+let row = document.createElement("tr");
+
+row.innerHTML =
+"<td>"+c.id+"</td>" +
+"<td>"+c.name+"</td>" +
+"<td>"+c.category+"</td>" +
+"<td>"+c.location+"</td>" +
+"<td>"+c.status+"</td>";
+
+table.appendChild(row);
+
+});
+
+/* Search Function */
+
+function searchTable(){
+
+let input = document.getElementById("searchInput").value.toLowerCase();
+let rows = document.querySelectorAll("#complaintTable tr");
+
+rows.forEach(function(row, index){
+
+if(index === 0) return; // skip header
+
+let text = row.innerText.toLowerCase();
+
+row.style.display = text.includes(input) ? "" : "none";
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

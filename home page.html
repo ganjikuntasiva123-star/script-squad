@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Citizen Grievance Management Portal</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+color:white;
+overflow-x:hidden;
+
+background:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1494526585095-c41746248156");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+/* floating shapes */
+
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.15);
+animation:float 10s infinite ease-in-out;
+}
+
+.circle1{width:120px;height:120px;top:15%;left:10%;}
+.circle2{width:80px;height:80px;top:70%;left:20%;}
+.circle3{width:150px;height:150px;top:50%;left:80%;}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-30px);}
+100%{transform:translateY(0);}
+}
+
+/* Header */
+
+header{
+background:#2c3e50;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+color:#f1c40f;
+}
+
+header p{
+margin:5px;
+font-size:14px;
+}
+
+/* Navigation */
+
+nav{
+background:#34495e;
+padding:12px;
+text-align:center;
+}
+
+nav a{
+color:#ecf0f1;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+font-size:16px;
+}
+
+nav a:hover{
+color:#f1c40f;
+}
+
+.login-btn{
+background:#e74c3c;
+padding:8px 15px;
+border-radius:5px;
+}
+
+/* Hero */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+}
+
+.hero h2{
+font-size:36px;
+}
+
+.hero p{
+font-size:18px;
+max-width:700px;
+margin:auto;
+}
+
+/* Buttons */
+
+button{
+padding:12px 25px;
+margin:10px;
+border:none;
+background:#f39c12;
+color:white;
+font-size:16px;
+cursor:pointer;
+border-radius:6px;
+transition:0.3s;
+}
+
+button:hover{
+background:#e67e22;
+transform:scale(1.05);
+}
+
+/* About section */
+
+.about{
+text-align:center;
+padding:40px;
+background:rgba(0,0,0,0.5);
+}
+
+.about p{
+max-width:800px;
+margin:auto;
+font-size:17px;
+}
+
+/* Statistics */
+
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:40px;
+flex-wrap:wrap;
+}
+
+.stat-box{
+background:rgba(255,255,255,0.9);
+color:#2c3e50;
+padding:25px;
+border-radius:10px;
+text-align:center;
+width:200px;
+}
+
+.stat-box h2{
+margin:0;
+color:#3498db;
+}
+
+/* Complaint Categories */
+
+.categories{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+padding:40px;
+}
+
+.category{
+background:white;
+color:#2c3e50;
+padding:20px;
+border-radius:10px;
+width:200px;
+text-align:center;
+}
+
+/* Features */
+
+.features{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:30px;
+padding:40px;
+}
+
+.card{
+background:white;
+color:#2c3e50;
+width:260px;
+border-radius:10px;
+padding:20px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:80px;
+margin-bottom:10px;
+}
+
+/* Process */
+
+.process{
+text-align:center;
+padding:50px;
+background:rgba(0,0,0,0.6);
+}
+
+.steps{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:40px;
+margin-top:30px;
+}
+
+.step{
+width:200px;
+}
+
+.step h3{
+color:#f1c40f;
+}
+
+/* Contact */
+
+.contact{
+text-align:center;
+padding:40px;
+background:#34495e;
+}
+
+/* Footer */
+
+footer{
+background:#2c3e50;
+text-align:center;
+padding:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="circle circle1"></div>
+<div class="circle circle2"></div>
+<div class="circle circle3"></div>
+
+<header>
+<h1>Citizen Grievance Management Portal</h1>
+<p>Developed and Managed by <b>Keerthi Pvt Ltd</b></p>
+</header>
+
+<nav>
+<a href="homepage.html">Home</a>
+<a href="about.html">About us</a>
+<a href="reminder.html">Send Reminder</a>
+<a href="view.html">View Status</a>
+<a href="help.html">Help</a>
+<a href="login.html" class="login-btn">Login</a>
+</nav>
+
+<div class="hero">
+
+<h2>Empowering Citizens to Report Civic Issues</h2>
+
+<p>
+Our platform helps citizens report public problems such as road damage,
+garbage overflow, electricity failure, and water supply issues.
+Authorities review and resolve complaints quickly to improve city services.
+</p>
+
+<br>
+
+<a href="user.html"><button>User Portal</button></a>
+<a href="Complaints.html"><button>Complaints Portal</button></a>
+<a href="officer.html"><button>Officer Portal</button></a>
+<a href="track.html"><button>Track Status</button></a>
+
+</div>
+
+<div class="about">
+<h2>About This Portal</h2>
+<p>
+The Citizen Grievance Management Portal is designed to improve
+communication between citizens and government authorities.
+Through this system, users can register complaints, track their
+status, and receive updates until the issue is resolved.
+The system is developed and maintained by <b>Keerthi Pvt Ltd</b>.
+</p>
+</div>
+
+<div class="stats">
+
+<div class="stat-box">
+<h2>500+</h2>
+<p>Complaints Registered</p>
+</div>
+
+<div class="stat-box">
+<h2>420+</h2>
+<p>Resolved Cases</p>
+</div>
+
+<div class="stat-box">
+<h2>50+</h2>
+<p>Active Officers</p>
+</div>
+
+</div>
+
+<div class="categories">
+
+<div class="category">Road Damage</div>
+<div class="category">Water Supply</div>
+<div class="category">Garbage & Sanitation</div>
+<div class="category">Electricity Issues</div>
+
+</div>
+
+<div class="features">
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
+<h3>Submit Complaints</h3>
+<p>Citizens can report civic issues quickly through the portal.</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/190/190411.png">
+<h3>Track Status</h3>
+<p>Monitor the progress of your complaint in real time.</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+<h3>Admin Monitoring</h3>
+<p>Authorities monitor and resolve issues efficiently.</p>
+</div>
+
+</div>
+
+<div class="process">
+
+<h2>How the System Works</h2>
+
+<div class="steps">
+
+<div class="step">
+<h3>1. Submit</h3>
+<p>Register your complaint with full details.</p>
+</div>
+
+<div class="step">
+<h3>2. Review</h3>
+<p>Authorities review and assign the complaint.</p>
+</div>
+
+<div class="step">
+<h3>3. Resolve</h3>
+<p>The issue is resolved and status is updated.</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="contact">
+<h2>Contact Support</h2>
+<p>Email: support@keerthipvtltd.com</p>
+<p>Phone: +91 98765 43210</p>
+<p>Company: <b>Keerthi Pvt Ltd</b></p>
+</div>
+
+<footer>
+<p>© 2025 Citizen Grievance Management System | Developed by Keerthi Pvt Ltd</p>
+</footer>
+
+</body>
+</html>

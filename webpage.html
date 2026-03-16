@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Citizen Grievance Management Portal</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f2f4f7;
+}
+
+header{
+background:#2c3e50;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.container{
+width:400px;
+margin:30px auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+input,textarea,select{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+padding:10px;
+background:#3498db;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#2980b9;
+}
+
+.section{
+margin-top:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Citizen Grievance Management Portal</h1>
+</header>
+
+<div class="container">
+
+<!-- REGISTER -->
+
+<div class="section">
+<h3>Register</h3>
+
+<input id="name" placeholder="Name">
+<input id="email" placeholder="Email">
+<input id="phone" placeholder="Phone">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+</div>
+
+<!-- LOGIN -->
+
+<div class="section">
+
+<h3>Login</h3>
+
+<input id="login_email" placeholder="Email">
+<input id="login_password" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<!-- COMPLAINT -->
+
+<div class="section">
+
+<h3>Submit Complaint</h3>
+
+<input id="title" placeholder="Title">
+
+<textarea id="description" placeholder="Description"></textarea>
+
+<select id="category">
+<option>Road</option>
+<option>Water</option>
+<option>Electricity</option>
+<option>Waste</option>
+<option>Public Safety</option>
+</select>
+
+<input id="location" placeholder="Location">
+
+<button onclick="submitComplaint()">Submit Complaint</button>
+
+</div>
+
+<!-- TRACK -->
+
+<div class="section">
+
+<h3>Track Complaint</h3>
+
+<input id="cid" placeholder="Complaint ID">
+
+<button onclick="trackComplaint()">Track</button>
+
+<p id="status"></p>
+
+</div>
+
+</div>
+
+<script>
+
+let user_id="";
+
+async function register(){
+
+const data={
+name:document.getElementById("name").value,
+email:document.getElementById("email").value,
+phone:document.getElementById("phone").value,
+password:document.getElementById("password").value
+}
+
+await fetch("http://localhost:5000/api/auth/register",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+})
+
+alert("Registered Successfully")
+
+}
+
+async function login(){
+
+const data={
+email:document.getElementById("login_email").value,
+password:document.getElementById("login_password").value
+}
+
+const res = await fetch("http://localhost:5000/api/auth/login",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+})
+
+const user = await res.json()
+
+user_id = user._id
+
+alert("Login Successful")
+
+}
+
+async function submitComplaint(){
+
+const data={
+user_id:user_id,
+title:title.value,
+description:description.value,
+category:category.value,
+location:location.value
+}
+
+const res = await fetch("http://localhost:5000/api/complaints/submit",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(data)
+})
+
+const result = await res.json()
+
+alert("Complaint ID: "+result.id)
+
+}
+
+async function trackComplaint(){
+
+const id = document.getElementById("cid").value
+
+const res = await fetch("http://localhost:5000/api/complaints/user/"+user_id)
+
+const complaints = await res.json()
+
+const found = complaints.find(c=>c.complaint_id===id)
+
+if(found){
+document.getElementById("status").innerHTML="Status: "+found.status
+}
+else{
+document.getElementById("status").innerHTML="Complaint not found"
+}
+
+}
+
+</script>
+
+</body>
+</html>
